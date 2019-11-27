@@ -1,12 +1,17 @@
 <template>
-  <div>
-    <el-input
-      ref="inputSearch"
-      placeholder="Search..."
-      v-model="search"
-      @keyup.native="handlerSearchBlur"
-      @keydown.native="handleSearch"
-    ></el-input>
+  <div id="Terms">
+    <div>
+      <el-input
+        ref="inputSearch"
+        placeholder="Search..."
+        v-model="search"
+        @keyup.native="handlerSearchBlur"
+        @keydown.native="handleSearch"
+      ></el-input>
+    </div>
+    <div>
+      <Upload />
+    </div>
     <h3>Data</h3>
     <el-table
       ref="table"
@@ -21,15 +26,29 @@
       <el-table-column prop="title" label="Title" width="180">
       </el-table-column>
       <el-table-column prop="status" label="Completed"> </el-table-column>
+      <el-table-column label="Operations">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            >Edit</el-button
+          >
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+            >Delete</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
-
 <script>
 // const axios = require("axios");
 // import _ from "lodash";
+import Upload from "./utils/Upload";
 
 export default {
+  components: { Upload },
   data() {
     return {
       tableData: [
@@ -75,6 +94,33 @@ export default {
     },
   },
   methods: {
+    handleEdit(scope, row) {
+      console.log("handleEdit", scope, row);
+    },
+    handleDelete(scope, row) {
+      console.log("handleDelete", scope, row);
+      this.$confirm(
+        "This will permanently delete the file. Continue?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning"
+        }
+      )
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "Delete completed"
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Delete canceled"
+          });
+        });
+    },
     /**
      * Gestion des selections lors d'une recherche:
      * ---
@@ -110,3 +156,8 @@ export default {
   },
 };
 </script>
+<style scoped>
+#Terms {
+  margin-top: 20px;
+}
+</style>

@@ -1,15 +1,6 @@
 <template>
   <div>
     <el-input
-      placeholder="Please input"
-      v-model="input"
-      ref="myInput"
-      @keyup.native="testEvent"
-      @keydown.native="testEvent2"
-    >
-    </el-input>
-
-    <el-input
       ref="inputSearch"
       placeholder="Search..."
       v-model="search"
@@ -41,7 +32,6 @@
 export default {
   data() {
     return {
-      input: "tagada",
       tableData: [
         {
           userId: 1,
@@ -86,12 +76,6 @@ export default {
     }
   },
   methods: {
-    testEvent() {
-      console.log("testEvent fired");
-    },
-    testEvent2() {
-      console.log("testEvent 2 fired");
-    },
     /**
      * Gestion des selections lors d'une recherche:
      * ---

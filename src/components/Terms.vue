@@ -57,40 +57,41 @@ export default {
           id: 2,
           title: "quis ut nam facilis et officia qui",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 3,
           title: "fugiat veniam minus",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 4,
           title: "et porro tempora",
           completed: true,
-          status: "yes"
-        }
+          status: "yes",
+        },
       ],
       selected: [],
       search: "",
       ignoreSelect: false,
       searchFilter() {
         return this.tableData.filter(
-          d => d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+          (d) =>
+            d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1,
         );
       },
       error: false,
-      loading: false
+      loading: false,
     };
   },
   mounted() {},
   computed: {
     getDefinitions() {
       return this.searchFilter();
-    }
+    },
   },
   methods: {
     handleEdit(scope, row) {
@@ -138,7 +139,7 @@ export default {
       for (let def of this.tableData)
         this.$refs.table.toggleRowSelection(
           def,
-          !!this.selected.find(s => s.id === def.id)
+          !!this.selected.find((s) => s.id === def.id),
         );
 
       this.ignoreSelect = false;
@@ -146,15 +147,13 @@ export default {
     selectionChange(val) {
       /* check if selection in memory should be preserved */
       if (this.ignoreSelect === true) {
-        console.log("ignore selection change");
         return;
       }
 
-      console.log("selectionChange", val);
       // this.selected = _.uniq(val.concat(this.selected));
       this.selected = val;
-    }
-  }
+    },
+  },
 };
 </script>
 <style scoped>

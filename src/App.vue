@@ -1,22 +1,17 @@
 <template>
   <div id="app">
     <Header />
-    <BlockGame />
-    <Terms />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import BlockGame from "./components/BlockGame";
-import Terms from "./components/Terms";
 import Header from "./components/layout/Header";
 
 export default {
   name: "app",
   components: {
-    Terms,
-    BlockGame,
-    Header
+    Header,
   },
 };
 </script>

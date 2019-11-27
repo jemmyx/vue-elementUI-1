@@ -9,9 +9,6 @@
         @keydown.native="handleSearch"
       ></el-input>
     </div>
-    <div>
-      <Upload />
-    </div>
     <h3>Data</h3>
     <el-table
       ref="table"
@@ -45,10 +42,9 @@
 <script>
 // const axios = require("axios");
 // import _ from "lodash";
-import Upload from "./utils/Upload";
 
 export default {
-  components: { Upload },
+  components: {},
   data() {
     return {
       tableData: [
@@ -105,19 +101,19 @@ export default {
         {
           confirmButtonText: "OK",
           cancelButtonText: "Cancel",
-          type: "warning"
-        }
+          type: "warning",
+        },
       )
         .then(() => {
           this.$message({
             type: "success",
-            message: "Delete completed"
+            message: "Delete completed",
           });
         })
         .catch(() => {
           this.$message({
             type: "info",
-            message: "Delete canceled"
+            message: "Delete canceled",
           });
         });
     },

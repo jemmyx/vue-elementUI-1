@@ -38,42 +38,41 @@ export default {
           id: 2,
           title: "quis ut nam facilis et officia qui",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 3,
           title: "fugiat veniam minus",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 4,
           title: "et porro tempora",
           completed: true,
-          status: "yes"
-        }
+          status: "yes",
+        },
       ],
       selected: [],
       search: "",
       ignoreSelect: false,
       searchFilter() {
-        console.log("searchFilter");
         return this.tableData.filter(
-          d => d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+          (d) =>
+            d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1,
         );
       },
       error: false,
-      loading: false
+      loading: false,
     };
   },
   mounted() {},
   computed: {
     getDefinitions() {
-      console.log("getDefinitions");
       return this.searchFilter();
-    }
+    },
   },
   methods: {
     /**
@@ -86,19 +85,15 @@ export default {
      * et, pour chacune d'elle, verifier si l'ID est present dans le []selected. Si oui, declencher le $refs.table.toggleRowSelection
      */
 
-    handleSearch(e) {
-      console.log("handleSearch");
+    handleSearch() {
       /* observer on user typing keyboard */
       this.ignoreSelect = true;
-      console.log("typing... ", e);
     },
     handlerSearchBlur() {
-      console.log("handlerSearchBlur");
-
       for (let def of this.tableData)
         this.$refs.table.toggleRowSelection(
           def,
-          !!this.selected.find(s => s.id === def.id)
+          !!this.selected.find((s) => s.id === def.id),
         );
 
       this.ignoreSelect = false;
@@ -106,14 +101,12 @@ export default {
     selectionChange(val) {
       /* check if selection in memory should be preserved */
       if (this.ignoreSelect === true) {
-        console.log("ignore selection change");
         return;
       }
 
-      console.log("selectionChange", val);
       // this.selected = _.uniq(val.concat(this.selected));
       this.selected = val;
-    }
-  }
+    },
+  },
 };
 </script>

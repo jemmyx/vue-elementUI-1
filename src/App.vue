@@ -1,17 +1,20 @@
 <template>
   <div id="app">
+    <BlockGame />
     <Terms />
   </div>
 </template>
 
 <script>
+import BlockGame from "./components/BlockGame";
 import Terms from "./components/Terms";
 
 export default {
   name: "app",
   components: {
-    Terms
-  }
+    Terms,
+    BlockGame,
+  },
 };
 </script>
 <style>

@@ -1,21 +1,14 @@
 <template>
-  <div>
-    <el-input
-      placeholder="Please input"
-      v-model="input"
-      ref="myInput"
-      @keyup.native="testEvent"
-      @keydown.native="testEvent2"
-    >
-    </el-input>
-
-    <el-input
-      ref="inputSearch"
-      placeholder="Search..."
-      v-model="search"
-      @keyup.native="handlerSearchBlur"
-      @keydown.native="handleSearch"
-    ></el-input>
+  <div id="Terms">
+    <div>
+      <el-input
+        ref="inputSearch"
+        placeholder="Search..."
+        v-model="search"
+        @keyup.native="handlerSearchBlur"
+        @keydown.native="handleSearch"
+      ></el-input>
+    </div>
     <h3>Data</h3>
     <el-table
       ref="table"
@@ -30,67 +23,99 @@
       <el-table-column prop="title" label="Title" width="180">
       </el-table-column>
       <el-table-column prop="status" label="Completed"> </el-table-column>
+      <el-table-column label="Operations">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="handleEdit(scope.$index, scope.row)"
+            >Edit</el-button
+          >
+          <el-button
+            size="mini"
+            type="danger"
+            @click="handleDelete(scope.$index, scope.row)"
+            >Delete</el-button
+          >
+        </template>
+      </el-table-column>
     </el-table>
   </div>
 </template>
-
 <script>
 // const axios = require("axios");
 // import _ from "lodash";
 
 export default {
+  components: {},
   data() {
     return {
-      input: "tagada",
       tableData: [
         {
           userId: 1,
           id: 2,
           title: "quis ut nam facilis et officia qui",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 3,
           title: "fugiat veniam minus",
           completed: false,
-          status: "no"
+          status: "no",
         },
         {
           userId: 1,
           id: 4,
           title: "et porro tempora",
           completed: true,
-          status: "yes"
-        }
+          status: "yes",
+        },
       ],
       selected: [],
       search: "",
       ignoreSelect: false,
       searchFilter() {
-        console.log("searchFilter");
         return this.tableData.filter(
-          d => d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1
+          (d) =>
+            d.title.toLowerCase().indexOf(this.search.toLowerCase()) !== -1,
         );
       },
       error: false,
-      loading: false
+      loading: false,
     };
   },
   mounted() {},
   computed: {
     getDefinitions() {
-      console.log("getDefinitions");
       return this.searchFilter();
-    }
+    },
   },
   methods: {
-    testEvent() {
-      console.log("testEvent fired");
+    handleEdit(scope, row) {
+      console.log("handleEdit", scope, row);
     },
-    testEvent2() {
-      console.log("testEvent 2 fired");
+    handleDelete(scope, row) {
+      console.log("handleDelete", scope, row);
+      this.$confirm(
+        "This will permanently delete the file. Continue?",
+        "Warning",
+        {
+          confirmButtonText: "OK",
+          cancelButtonText: "Cancel",
+          type: "warning",
+        },
+      )
+        .then(() => {
+          this.$message({
+            type: "success",
+            message: "Delete completed",
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "Delete canceled",
+          });
+        });
     },
     /**
      * Gestion des selections lors d'une recherche:
@@ -102,19 +127,15 @@ export default {
      * et, pour chacune d'elle, verifier si l'ID est present dans le []selected. Si oui, declencher le $refs.table.toggleRowSelection
      */
 
-    handleSearch(e) {
-      console.log("handleSearch");
+    handleSearch() {
       /* observer on user typing keyboard */
       this.ignoreSelect = true;
-      console.log("typing... ", e);
     },
     handlerSearchBlur() {
-      console.log("handlerSearchBlur");
-
       for (let def of this.tableData)
         this.$refs.table.toggleRowSelection(
           def,
-          !!this.selected.find(s => s.id === def.id)
+          !!this.selected.find((s) => s.id === def.id),
         );
 
       this.ignoreSelect = false;
@@ -122,14 +143,17 @@ export default {
     selectionChange(val) {
       /* check if selection in memory should be preserved */
       if (this.ignoreSelect === true) {
-        console.log("ignore selection change");
         return;
       }
 
-      console.log("selectionChange", val);
       // this.selected = _.uniq(val.concat(this.selected));
       this.selected = val;
-    }
-  }
+    },
+  },
 };
 </script>
+<style scoped>
+#Terms {
+  margin-top: 20px;
+}
+</style>

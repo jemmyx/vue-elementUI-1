@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <Terms />
+    <Header />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Terms from "./components/Terms";
+import Header from "./components/layout/Header";
 
 export default {
   name: "app",
   components: {
-    Terms
-  }
+    Header,
+  },
 };
 </script>
 <style>
@@ -21,6 +22,8 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+#app * {
+  font-family: "Avenir", Helvetica, Arial, sans-serif;
 }
 </style>

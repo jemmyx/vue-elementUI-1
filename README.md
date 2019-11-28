@@ -5,6 +5,10 @@
 yarn install
 ```
 
+Installed socket.io
+
+
+
 ### Compiles and hot-reloads for development
 ```
 yarn serve
@@ -22,3 +26,5 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+

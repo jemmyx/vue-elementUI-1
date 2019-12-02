@@ -8,6 +8,7 @@ import App from "./App.vue";
 import Terms from "./components/Terms";
 import Dashboard from "./components/Dashboard";
 import BlockGame from "./components/BlockGame";
+import Profile from "./components/Profile";
 
 Vue.use(ElementUI);
 Vue.use(VueRouter);
@@ -15,6 +16,7 @@ Vue.use(VueRouter);
 const routes = [
   { path: "/terms", component: Terms },
   { path: "/game", component: BlockGame },
+  { path: "/profile", component: Profile },
   { path: "/", component: Dashboard },
   { path: "*", component: Dashboard },
 ];

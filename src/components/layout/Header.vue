@@ -21,6 +21,9 @@
       <el-menu-item index="3">
         <router-link to="/terms">Terms</router-link>
       </el-menu-item>
+      <el-menu-item index="3">
+        <router-link to="/profile">Profile</router-link>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -29,14 +32,14 @@ export default {
   data() {
     return {
       activeIndex: "1",
-      activeIndex2: "1",
+      activeIndex2: "1"
     };
   },
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath);
-    },
-  },
+    }
+  }
 };
 </script>
 <style scoped></style>
